@@ -11,7 +11,7 @@ import toast from 'react-hot-toast'
 
 
 
-const page = () => {
+const SignIn = () => {
    const [signindata,setsignindata] = useState(null);
     const login = async()=>{
         try {
@@ -42,7 +42,7 @@ const page = () => {
             <Input required onChange={(e:ChangeEvent<HTMLInputElement>)=>setemail(e.target.value)} placeholder='Enter your email address'/>
             <Input required onChange={(e:ChangeEvent<HTMLInputElement>)=>setpassword(e.target.value)} placeholder=' Enter your password'/>
             <StateButton buttonText='Sign In'/>
-            <Link href={'/signup'}>Don't have a account ? Go to signup</Link>
+            <Link href={'/signup'}>Do not have a account ? Go to signup</Link>
             </form>
            </>
          )
@@ -51,4 +51,4 @@ const page = () => {
   )
 }
 
-export default page
+export default SignIn;
