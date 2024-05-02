@@ -36,8 +36,8 @@ const VerifyOtp = ({setStep}:{setStep:(step:number)=>void}) => {
     }
     
   return (
-    <div className=' flex flex-col gap-3 items-center'>
-      <h1 className=' font-bold text-2xl'>{`We have sent an otp to ${data?.email}`}</h1>
+    <div className='max-sm:text-center max-sm:text-base flex flex-col gap-3 items-center'>
+      <h1 className='max-sm:text-center max-sm:text-base  font-bold text-2xl'>{`We have sent an otp to ${data?.email}`}</h1>
       <p>Please check in you email and enter the otp below to complete signup process</p>
       <p>If you are unable to find otp in inbox please check your spam folder</p>
       <div className=' flex flex-col items-center mt-8 gap-4'>

@@ -32,7 +32,7 @@ const SignIn = () => {
 
     
   return (
-    <div className='w-[30vw]  rounded-md bg-secondary flex flex-col gap-3 py-5 '>
+    <div className=' max-sm:w-[95vw] w-[30vw]  rounded-md bg-secondary flex flex-col gap-3 py-5 '>
         {
           signindata?<Authenticate setsignindata={setsignindata} signindata = {signindata}/>:(
            <>

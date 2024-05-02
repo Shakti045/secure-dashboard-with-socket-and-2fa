@@ -27,7 +27,7 @@ const DeviceCard = ({devicetype,os,version,clientname,_id,timeoflogin,clienttype
       }
    }
   return (
-    <div className=' w-[30vw] h-[30vh] flex flex-col justify-between font-bold p-3 rounded-md bg-secondary-foreground text-secondary'>
+    <div className=' max-sm:w-[95vw] w-[30vw] h-[30vh] flex flex-col justify-between font-bold p-3 rounded-md bg-secondary-foreground text-secondary'>
        {
         loading?<div className=' w-full h-full flex justify-center items-center'>
           <Loader></Loader>
@@ -35,7 +35,7 @@ const DeviceCard = ({devicetype,os,version,clientname,_id,timeoflogin,clienttype
          <div className=' border-b-[1px]  border-slate-500 pb-3 w-full flex justify-between items-center'>
         <div className=' flex gap-2 items-center '>
             {
-                devicetype==='mobile'?<Smartphone size={25}/>:<Monitor size={25}/>
+                devicetype==='smartphone'?<Smartphone size={25}/>:<Monitor size={25}/>
             }
             <p>{os} {version}</p>
         </div>

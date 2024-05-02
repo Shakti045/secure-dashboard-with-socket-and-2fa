@@ -35,7 +35,7 @@ const page = async() => {
      <div className=' flex flex-col gap-3 items-center '>
       <Image src="/security-guard.png" width={200} height={100} alt='security guard image'/>
       <h1 className=' text-2xl font-bold'>Manage Access And Devices</h1>
-      <p className=' w-[40vw] text-center'>Theese signed-in devices have recently been active on this account.You can signout any unfamilliar devices or change your password for added security.</p>
+      <p className=' max-sm:w-[95vw] w-[40vw] text-center'>Theese signed-in devices have recently been active on this account.You can signout any unfamilliar devices or change your password for added security.</p>
      </div>
      <Devices deviceid = {deviceId} userid= {userId}  logindevices={responce?.logindevices || []}/>
     </div>

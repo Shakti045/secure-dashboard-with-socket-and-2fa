@@ -42,7 +42,7 @@ const SignupDetails = ({setStep}:{setStep:(step:number)=>void}) => {
 
     const [state, formAction] = useFormState(getOtp , undefined);
   return (
-    <div className=' w-[30vw]  rounded-md bg-secondary flex flex-col gap-3'>
+    <div className='max-sm:w-[95vw] w-[30vw]  rounded-md bg-secondary flex flex-col gap-3'>
         <h1 className=' font-bold text-2xl text-center'>Welcome!</h1>
         <h1 className=' font-bold text-2xl text-center border-b-[0.5px] border-secondary-foreground pb-2'>Create your account</h1>
         <form  action={formAction} className=' w-full flex flex-col gap-3 p-4'>
