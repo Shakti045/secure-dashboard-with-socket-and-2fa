@@ -52,7 +52,7 @@ const SignupDetails = ({setStep}:{setStep:(step:number)=>void}) => {
         <Input type='text' required name='username' onChange={handleChange} placeholder='Enter your username'/>
         <Input type='password' required name='password' onChange={handleChange} placeholder='Enter your password'/>
         <Input type='password' required name='confirmPassword' onChange={handleChange} placeholder='Confirm your password'/>
-        <StateButton buttonText='Sign Up'/>
+        <StateButton buttonText='Sign In'/>
         </form>
      </div>
   )

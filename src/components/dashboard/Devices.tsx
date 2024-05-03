@@ -55,7 +55,8 @@ const Devices = ({logindevices,deviceid,userid}:{logindevices:Device[],deviceid:
       if(did==deviceid){
            logout();
         }
-      setDevices([...devices.filter(device=>device._id!==did)]);
+      const updated_devices = devices.filter(device=>device._id!==did);
+      setDevices([...updated_devices]);
     })
     return () => {
       socket.off("connect", onConnect);

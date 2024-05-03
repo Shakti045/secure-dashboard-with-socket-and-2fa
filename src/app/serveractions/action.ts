@@ -4,6 +4,8 @@ import { userurls } from '@/lib/urls';
 import axios from 'axios';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation';
+import { NextRequest, NextResponse } from 'next/server';
 
  
 export async function createCookie(token:string,deviceid:string,userId:string) {
@@ -29,21 +31,20 @@ export async function getDeviceId(){
 
 export async function getallcookieinfo(){
   const cookieStore = cookies();
-  return {token:cookieStore.get('token')?.value,deviceId:cookieStore.get('deviceid')?.value,userId:cookieStore.get('userId')?.value}
+  return {token:cookieStore.get('token')?.value ,deviceId:cookieStore.get('deviceid')?.value ,userId:cookieStore.get('userId')?.value }
 }
-export async function getuserinfo(){
+export async function getuserinfo(request:NextRequest){
   try {
     const cookieStore = cookies();
     const token = cookieStore.get('token')?.value;
     const responce  = await axios.get(userurls.getinfo,{headers:{Authorization:`Bearer ${token}`}});
     
     if(responce.data.message==="Device has been removed"){
-      return null;
+      return undefined; 
     }
-       revalidatePath("/");
-        return responce.data?.data;
-    } catch (error) {
-        console.log(error)
-        return null;
-    }
+    revalidatePath("/");
+    return responce.data?.data;
+  } catch (error) {
+    return null;
+  }
 }

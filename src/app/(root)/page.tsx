@@ -2,28 +2,34 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import React from 'react'
 import { getallcookieinfo, getuserinfo, removeCookie } from '../serveractions/action'
-
+import cookie from 'cookie';
 import { redirect } from 'next/navigation'
 import Devices from '@/components/dashboard/Devices'
 import Logout from '@/components/dashboard/Logout'
 import Link from 'next/link'
+import { NextRequest } from 'next/server'
+
+// export const getServerSideProps= async(context)=>{
+//    const {req} = context;
+// }
 
 
-const page = async() => {
-  const responce = await getuserinfo();
-  const {deviceId,userId,token} = await getallcookieinfo();
+
+const Home = async(request:NextRequest) => {
   const handlelogout = async()=>{
     'use server'
     await removeCookie();
     redirect('/signin');
   }
 
-  if(responce==null || !deviceId || !userId || !token) {
-     return <div className=' w-full h-[100vh] font-bold text-2xl justify-center items-center flex flex-col gap-3'>
-       <p>Your device has been removed!!</p>
-       <p>Kindly logout and login again </p>
-       <form action={handlelogout}><Button>Signout</Button></form>
-     </div>
+  const responce = await getuserinfo(request);
+  const {deviceId,userId,token}:{deviceId?:string,userId?:string,token?:string} = await getallcookieinfo();
+  if(responce==undefined || deviceId==null || userId==null || token==null){
+    return <div className=' w-[1oovw] h-[100vh] flex flex-col gap-3 justify-center items-center'>
+    <h1 className='font-bold text-3xl'>Your device has been removed</h1>
+    <p>If you want to login kindly logout and login again</p>
+     <form action={handlelogout}><Button>Signout</Button></form>
+    </div>
   }
   
   return (
@@ -43,4 +49,4 @@ const page = async() => {
   )
 }
 
-export default page
+export default Home
