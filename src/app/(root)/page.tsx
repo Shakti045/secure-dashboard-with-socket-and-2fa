@@ -9,22 +9,18 @@ import Logout from '@/components/dashboard/Logout'
 import Link from 'next/link'
 import { NextRequest } from 'next/server'
 
-// export const getServerSideProps= async(context)=>{
-//    const {req} = context;
-// }
 
 
-
-const Home = async(request:NextRequest) => {
+const Home = async() => {
   const handlelogout = async()=>{
     'use server'
     await removeCookie();
     redirect('/signin');
   }
 
-  const responce = await getuserinfo(request);
+  const responce = await getuserinfo();
   const {deviceId,userId,token}:{deviceId?:string,userId?:string,token?:string} = await getallcookieinfo();
-  if(responce==undefined || deviceId==null || userId==null || token==null){
+  if(responce==undefined || !deviceId || !userId || !token){
     return <div className=' w-[1oovw] h-[100vh] flex flex-col gap-3 justify-center items-center'>
     <h1 className='font-bold text-3xl'>Your device has been removed</h1>
     <p>If you want to login kindly logout and login again</p>
