@@ -11,7 +11,7 @@ type Device = {
   version:string,
   clientname:string,
   _id:string,
-  timeoflogin:string,
+  timeoflogin:number,
   clienttype:string,
   ip:string,
 }

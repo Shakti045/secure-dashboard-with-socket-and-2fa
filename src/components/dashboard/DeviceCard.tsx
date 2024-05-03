@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
   version:string,
   clientname:string,
   _id:string,
-  timeoflogin:string,
+  timeoflogin:number,
   clienttype:string,
   ip:string,
   deviceid:string
@@ -56,7 +56,7 @@ const DeviceCard = ({devicetype,os,version,clientname,_id,timeoflogin,clienttype
         </div>
         <p className=' flex gap-2 items-center'><Globe/> {clientname} {clienttype}</p>
         <p className=' flex gap-2 items-center'><Network/>{ip}</p>
-        <p className=' flex gap-2 items-center'><Clock/>{format(new Date(timeoflogin), "hh:mm  - yyyy/MM/dd  ")}</p>
+        <p className=' flex gap-2 items-center'><Clock/>{format(new Date(new Date(timeoflogin)), "hh:mm  - yyyy/MM/dd  ")}</p>
         </>)
        }
     </div>
