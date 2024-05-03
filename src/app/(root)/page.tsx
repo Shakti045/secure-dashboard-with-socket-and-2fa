@@ -22,8 +22,8 @@ const Home = async() => {
   const {deviceId,userId,token}:{deviceId?:string,userId?:string,token?:string} = await getallcookieinfo();
   if(responce==undefined || !deviceId || !userId || !token){
     return <div className=' w-[1oovw] h-[100vh] flex flex-col gap-3 justify-center items-center'>
-    <h1 className='font-bold text-3xl'>Your device has been removed</h1>
-    <p>If you want to login kindly logout and login again</p>
+    <h1 className='font-bold text-3xl text-center'>Your device has been removed</h1>
+    <p className=' text-center'>If you want to login kindly logout and login again</p>
      <form action={handlelogout}><Button>Signout</Button></form>
     </div>
   }
