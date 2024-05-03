@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
  
 
-const publicpaths = ['/authenticate','/signin','/signup'];
-const protectedpaths = ['/dashboard','/'];
+const publicpaths = ['/authenticate','/signin','/signup','/resetpassword'];
+const protectedpaths = ['/changepassword','/'];
 export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
     const token = request.cookies.get('token')?.value || '';
@@ -18,6 +18,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/authenticate','/signin','/signup','/'
+    '/authenticate','/signin','/signup','/','/changepassword','/resetpassword'
   ],
 }

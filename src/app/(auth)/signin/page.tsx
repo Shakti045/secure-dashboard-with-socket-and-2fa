@@ -43,6 +43,7 @@ const SignIn = () => {
             <Input required onChange={(e:ChangeEvent<HTMLInputElement>)=>setpassword(e.target.value)} placeholder=' Enter your password'/>
             <StateButton buttonText='Sign In'/>
             <Link href={'/signup'}>Do not have a account ? Go to signup</Link>
+            <Link className=' text-green-600' href={'/resetpassword'}>Reset password</Link>
             </form>
            </>
          )

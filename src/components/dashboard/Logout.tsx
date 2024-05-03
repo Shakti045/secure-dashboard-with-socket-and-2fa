@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 const Logout = ({deviceid,token}:{deviceid:string,token:string}) => {
     const [loading,setloading] = useState(false);
     const router = useRouter();
-  const logout = async () => {
+const logout = async () => {
     try {
         setloading(true);
         await axios.delete(`${userurls.removedevice}/${deviceid}`,{headers:{Authorization:`Bearer ${token}`}})

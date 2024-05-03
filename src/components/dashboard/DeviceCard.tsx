@@ -9,7 +9,18 @@ import { userurls } from '@/lib/urls';
 import Loader from '../shared/Loader';
 import toast from 'react-hot-toast';
 
-const DeviceCard = ({devicetype,os,version,clientname,_id,timeoflogin,clienttype,ip,deviceid}:any) => {
+ type deviceCardProps = {
+  devicetype:string,
+  os:string,
+  version:string,
+  clientname:string,
+  _id:string,
+  timeoflogin:string,
+  clienttype:string,
+  ip:string,
+  deviceid:string
+}
+const DeviceCard = ({devicetype,os,version,clientname,_id,timeoflogin,clienttype,ip,deviceid}:deviceCardProps) => {
    const [loading,setloading] = useState(false);
    const removedevice =  async()=>{
     setloading(true);

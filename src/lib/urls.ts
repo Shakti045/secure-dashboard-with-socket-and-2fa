@@ -10,4 +10,6 @@ export const authurls = {
 export const userurls = {
     getinfo: `${baseurl}/getuserinfo`,
     removedevice: `${baseurl}/removedevice`,
+    changepassword: `${baseurl}/changepassword`,
+    resetpassword: `${baseurl}/resetpassword`,
 };

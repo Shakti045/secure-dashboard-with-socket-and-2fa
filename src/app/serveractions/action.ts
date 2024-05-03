@@ -2,6 +2,7 @@
  
 import { userurls } from '@/lib/urls';
 import axios from 'axios';
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers'
 
  
@@ -31,14 +32,15 @@ export async function getallcookieinfo(){
   return {token:cookieStore.get('token')?.value,deviceId:cookieStore.get('deviceid')?.value,userId:cookieStore.get('userId')?.value}
 }
 export async function getuserinfo(){
-    try {
-        const cookieStore = cookies();
-        const token = cookieStore.get('token')?.value;
-        const responce  = await axios.get(userurls.getinfo,{headers:{Authorization:`Bearer ${token}`}});
-     
-        if(responce.data.message==="Device has been removed"){
-           return null;
-        }
+  try {
+    const cookieStore = cookies();
+    const token = cookieStore.get('token')?.value;
+    const responce  = await axios.get(userurls.getinfo,{headers:{Authorization:`Bearer ${token}`}});
+    
+    if(responce.data.message==="Device has been removed"){
+      return null;
+    }
+       revalidatePath("/");
         return responce.data?.data;
     } catch (error) {
         console.log(error)
