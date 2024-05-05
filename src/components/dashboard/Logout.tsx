@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 
-const Logout = ({deviceid,token}:{deviceid:string,token:string}) => {
+const Logout = ({token,deviceid}:{token:string,deviceid:string}) => {
     const [loading,setloading] = useState(false);
     const router = useRouter();
 const logout = async () => {

@@ -1,9 +1,10 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import DeviceCard from './DeviceCard'
-import { socket } from '@/socket'
+import { connectSocket } from '@/socket'
 import { useRouter } from 'next/navigation'
 import { removeCookie } from '@/app/serveractions/action'
+import toast from 'react-hot-toast'
 
 type Device = {
   devicetype:string,
@@ -15,8 +16,9 @@ type Device = {
   clienttype:string,
   ip:string,
 }
-const Devices = ({logindevices,deviceid,userid}:{logindevices:Device[],deviceid:string,userid:string}) => {
+const Devices = ({logindevices,deviceid}:{logindevices:Device[],deviceid:string}) => {
   const [devices, setDevices] = useState<Device[]>(logindevices);
+  const [skt,setskt] = useState<any>(null);
   // const [isConnected, setIsConnected] = useState(false);
   // const [transport, setTransport] = useState("N/A");
   const router = useRouter();
@@ -25,44 +27,34 @@ const Devices = ({logindevices,deviceid,userid}:{logindevices:Device[],deviceid:
     await removeCookie();
     router.push('/signin');
   }
-  useEffect(() => {
-    if (socket.connected) {
-        onConnect();
-    }
-
-    function onConnect() {
-      // setIsConnected(true);
-      // setTransport(socket.io.engine.transport.name);
-
-      socket.io.engine.on("upgrade", (transport) => {
-        // setTransport(transport.name);
-      });
-    }
-
-    function onDisconnect() {
-      // setIsConnected(false);
-      // setTransport("N/A");
-    }
-
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
-    socket.emit('join',userid);
-    // socket.emit('joindevice',deviceid);
-    socket.on('new-device',(device:Device)=>{
-       setDevices([device,...devices]);
-    })
-    socket.on('remove-device',(did:string)=>{
-      if(did==deviceid){
-           logout();
+  
+  const initialiseSocket = async () => {
+    try {
+      const socket = await connectSocket();
+      socket.on('new-device',(device:Device)=>{
+        setDevices([device,...devices]);
+      })
+    
+      socket.on('remove-device',(did:string)=>{
+        if(did===deviceid) {
+          logout();
+          return;
         }
-      const updated_devices = devices.filter(device=>device._id!==did);
-      setDevices([...updated_devices]);
-    })
+        const updated_devices = devices.filter(device=>device._id!==did);
+        setDevices([...updated_devices]);
+      })
+      setskt(socket);
+    } catch (error) {
+      toast.error('Failed to connect to socket server');
+    }
+  }
+
+  useEffect(() => {
+    initialiseSocket();
     return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-    };
-  }, [deviceid,userid]);
+      skt?.disconnect();
+    }
+  }, []);
  
   return (
     <div className=' w-full  flex justify-center   flex-wrap  gap-4 p-5'>

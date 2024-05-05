@@ -22,7 +22,7 @@ const Authenticate = ({signindata,setsignindata}:{signindata:any,setsignindata:(
                 {userid:signindata?.userid,code:code});   
             if(responce.status === 200){
                 toast.success('Login successfull');
-                await createCookie(responce?.data?.token,responce?.data?.deviceid,responce?.data?.userid);
+                await createCookie(responce?.data?.token);
                 router.push("/");
                 setsignindata(null);
             }
