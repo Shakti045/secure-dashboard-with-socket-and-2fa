@@ -10,7 +10,7 @@ const status=useFormStatus();
       <>
       {
         status?.pending?<div className=' w-full h-full flex justify-center items-center'><Loader/></div>
-        :<Button aria-disabled={status?.pending} type="submit">Sign Up</Button>
+        :<Button aria-disabled={status?.pending} type="submit">{buttonText}</Button>
       }
       </>
   )
